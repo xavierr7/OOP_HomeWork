@@ -1,18 +1,23 @@
-#include <iostream>
 #include "String.h"
-using namespace std;
+
 
 int main()
 {
 
-	String str1("Hello");
+	String str1 = "Hello";
 	String str2("World");
 
 
-	String result;
-	result = str1 + str2;
+	String result = str1 + str2;
 	
-	result.Print();
+	
+	cout << result << endl << endl;
+
+	String tmp;
+
+	cin >> tmp;
+
+	cout << (tmp = tmp + str1 + str2);
 
 	return 0;
 }
