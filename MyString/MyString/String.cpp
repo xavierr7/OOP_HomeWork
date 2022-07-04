@@ -1,10 +1,19 @@
 #include "String.h"
 
+size_t String::countOfCreatedStrings = 0;
 
-String::String()
+//String::String()
+//{
+//	str = nullptr;
+//	length = 0;
+//}
+
+String::String(int length)
 {
-	str = nullptr;
-	length = 0;
+	this->length = length;
+	str = new char[length + 1];
+	str[0] = '\0';
+	++countOfCreatedStrings;
 }
 
 String::String(const char* str)
@@ -16,11 +25,13 @@ String::String(const char* str)
 		this->str[i] = str[i];
 	}
 	this->str[length] = '\0';
+	++countOfCreatedStrings;
 }
 
 String::~String()
 {
 	delete[] this->str;
+	--countOfCreatedStrings;
 }
 
 String::String(const String& other)
@@ -80,13 +91,18 @@ String String::operator+(const String& other)
 		}
 	}
 	newStr.str[newStr.length] = '\0';
-
+	countOfCreatedStrings++;
 	return newStr;
 }
 
 size_t String::Length()
 {
 	return length;
+}
+
+size_t String::GetCountOfCreatedStrings()
+{
+	return countOfCreatedStrings;
 }
 
 bool String::operator==(const String& other)
@@ -126,15 +142,13 @@ std::istream& operator >> (std::istream& in, String& obj)
 {
 	
 	char* inputData = nullptr;
-	char* tmp;
 	int counter = 0;
 	char symbol;
 
 	while (true)
 	{
-		if ((symbol = in.get())!= '\n')
+		if ((symbol = in.get()) != '\n')
 		{
-
 			inputData = (char*)realloc(inputData, ++counter);
 			inputData[counter - 1] = symbol;
 		}
@@ -152,6 +166,29 @@ std::istream& operator >> (std::istream& in, String& obj)
 		obj.str[i] = inputData[i];
 	}
 
-	
+	free(inputData);
 	return in;
+}
+
+void String::SetStr()
+{
+	String newStr;
+	cout << "Input string\n";
+	cin >> newStr;
+	*this = newStr;
+}
+
+void String::SetStr(const char* str)
+{
+	length = strlen(str);
+	for (size_t i = 0; i < length; i++)
+	{
+		this->str[i] = str[i];
+	}
+	this->str[length] = '\0';
+}
+
+void String::GetStr()
+{
+	cout << this->str << endl;
 }
