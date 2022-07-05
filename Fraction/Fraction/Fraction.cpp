@@ -1,14 +1,5 @@
 #include "Fraction.h"
 
-void Fraction::SetDenominator(size_t denominator)
-{
-	if (denominator == 0)
-	{
-		return;
-	}
-	this->denominator = denominator;
-}
-
 void Fraction::Simplify(Fraction& newFrac)
 {
 	int act = 1;
@@ -56,9 +47,31 @@ void Fraction::WholePart(Fraction& newFrac)
 	}
 }
 
-Fraction Fraction::operator+(const Fraction& other)
+void Fraction::conversionToImproperFraction(Fraction& newFrac)
+{
+	newFrac.numerator = newFrac.wholePart * newFrac.denominator + newFrac.numerator;
+	wholePart = 0;
+}
+
+Fraction Fraction::operator+( Fraction& other)
 {
 	Fraction newFraction;
+	if (this->wholePart > 0 || other.wholePart > 0)
+	{
+		if (this->wholePart > 0)
+		{
+			conversionToImproperFraction(*this);
+		}
+		else
+		{
+			conversionToImproperFraction(other);
+		}
+	}
+	else
+	{
+		conversionToImproperFraction(*this);
+		conversionToImproperFraction(other);
+	}
 
 	if (this->denominator == other.denominator)
 	{
@@ -72,6 +85,98 @@ Fraction Fraction::operator+(const Fraction& other)
 		Simplify(newFraction);
 		WholePart(newFraction);
 	}
+
+	return newFraction;
+}
+
+Fraction Fraction::operator-(Fraction& other)
+{
+	Fraction newFraction;
+	if (this->wholePart > 0 || other.wholePart > 0)
+	{
+		if (this->wholePart > 0)
+		{
+			conversionToImproperFraction(*this);
+		}
+		else
+		{
+			conversionToImproperFraction(other);
+		}
+	}
+	else
+	{
+		conversionToImproperFraction(*this);
+		conversionToImproperFraction(other);
+	}
+
+	if (this->denominator == other.denominator)
+	{
+		newFraction.numerator = numerator - other.numerator;
+		newFraction.denominator = denominator;
+	}
+	else
+	{
+		newFraction.numerator = this->numerator * other.denominator - other.numerator * this->denominator;
+		newFraction.denominator = this->denominator * other.denominator;
+		Simplify(newFraction);
+		WholePart(newFraction);
+	}
+
+	return newFraction;
+}
+
+Fraction Fraction::operator*(Fraction& other)
+{
+	Fraction newFraction;
+	if (this->wholePart > 0 || other.wholePart > 0)
+	{
+		if (this->wholePart > 0)
+		{
+			conversionToImproperFraction(*this);
+		}
+		else
+		{
+			conversionToImproperFraction(other);
+		}
+	}
+	else
+	{
+		conversionToImproperFraction(*this);
+		conversionToImproperFraction(other);
+	}
+
+	newFraction.numerator = numerator * other.numerator;
+	newFraction.denominator = denominator * other.denominator;
+	Simplify(newFraction);
+	WholePart(newFraction);
+
+	return newFraction;
+}
+
+Fraction Fraction::operator/(Fraction& other)
+{
+	Fraction newFraction;
+	if (this->wholePart > 0 || other.wholePart > 0)
+	{
+		if (this->wholePart > 0)
+		{
+			conversionToImproperFraction(*this);
+		}
+		else
+		{
+			conversionToImproperFraction(other);
+		}
+	}
+	else
+	{
+		conversionToImproperFraction(*this);
+		conversionToImproperFraction(other);
+	}
+
+	newFraction.numerator = numerator * other.denominator;
+	newFraction.denominator = denominator * other.numerator;
+	Simplify(newFraction);
+	WholePart(newFraction);
 
 	return newFraction;
 }
