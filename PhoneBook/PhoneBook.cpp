@@ -1,4 +1,4 @@
-#include "PhoneBook.h"
+ï»¿#include "PhoneBook.h"
 
 //////////////////////////////////////////////////////////////////////
 // Methods and Constructors for class Abonent
@@ -40,7 +40,7 @@ void Abonent::setFIO(const char* fio)
 {
 	if (strlen(fio) >= 80)
 	{
-		cout << "Çàíàäòî áàãàòî ñèìâîë³â, ìàêñèìóì 80!";
+		cout << "Ð—Ð°Ð½Ð°Ð´Ñ‚Ð¾ Ð±Ð°Ð³Ð°Ñ‚Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ–Ð², Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼ 80!";
 		system("pause");
 		system("cls");
 		return;
@@ -64,7 +64,7 @@ void Abonent::setPhone(const char* phone)
 {
 	if (strlen(phone) >= 25)
 	{
-		cout << "Çàíàäòî áàãàòî ñèìâîë³â, ìàêñèìóì 25!";
+		cout << "Ð—Ð°Ð½Ð°Ð´Ñ‚Ð¾ Ð±Ð°Ð³Ð°Ñ‚Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ–Ð², Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼ 25!";
 		system("pause");
 		system("cls");
 		return;
@@ -88,7 +88,7 @@ void Abonent::setInfo(const char* info)
 {
 	if (strlen(info) >= 250)
 	{
-		cout << "Çàíàäòî áàãàòî ñèìâîë³â, ìàêñèìóì 250!";
+		cout << "Ð—Ð°Ð½Ð°Ð´Ñ‚Ð¾ Ð±Ð°Ð³Ð°Ñ‚Ð¾ ÑÐ¸Ð¼Ð²Ð¾Ð»Ñ–Ð², Ð¼Ð°ÐºÑÐ¸Ð¼ÑƒÐ¼ 250!";
 		system("pause");
 		system("cls");
 		return;
@@ -120,7 +120,7 @@ void PhoneBook::menu()
 	{
 		system("cls");
 
-		int c = Menu::select_vertical({ "Äîäàòè", "Âèäàëèòè", "Äðóê", "Ïîøóê", "Âíåñòè ó ôàéë", "Ç÷èòàòè ç ôàéëó" , "Âèõ³ä"}, HorizontalAlignment::Center, 5);
+		int c = Menu::select_vertical({ "Ð”Ð¾Ð´Ð°Ñ‚Ð¸", "Ð’Ð¸Ð´Ð°Ð»Ð¸Ñ‚Ð¸", "Ð”Ñ€ÑƒÐº", "ÐŸÐ¾ÑˆÑƒÐº", "Ð’Ð½ÐµÑÑ‚Ð¸ Ñƒ Ñ„Ð°Ð¹Ð»", "Ð—Ñ‡Ð¸Ñ‚Ð°Ñ‚Ð¸ Ð· Ñ„Ð°Ð¹Ð»Ñƒ" , "Ð’Ð¸Ñ…Ñ–Ð´"}, HorizontalAlignment::Center, 5);
 		switch (c)
 		{
 		case 0:
@@ -154,7 +154,7 @@ void PhoneBook::print()
 {
 	system("cls");
 	cout << "   ----------------------------------------------------------------------\n";
-	cout << "   |                             ÂÑ² ÊÎÍÒÀÊÒÈ                           |\n";
+	cout << "   |                             Ð’Ð¡Ð† ÐšÐžÐÐ¢ÐÐšÐ¢Ð˜                           |\n";
 	cout << "   ----------------------------------------------------------------------\n";
 	for (size_t i = 0; i < size; i++)
 	{
@@ -188,7 +188,7 @@ void PhoneBook::delAbonent()
 void PhoneBook::findAbonent()
 {
 	char findFio[80];
-	cout << "Ââåä³òü Ï²Á àáîíåíòà ÿêîãî òðåáà çíàéòè\n";
+	cout << "Ð’Ð²ÐµÐ´Ñ–Ñ‚ÑŒ ÐŸÐ†Ð‘ Ð°Ð±Ð¾Ð½ÐµÐ½Ñ‚Ð° ÑÐºÐ¾Ð³Ð¾ Ñ‚Ñ€ÐµÐ±Ð° Ð·Ð½Ð°Ð¹Ñ‚Ð¸\n";
 	cin.getline(findFio, 80);
 	for (size_t i = 0; i < size; i++)
 	{
@@ -204,7 +204,7 @@ void PhoneBook::findAbonent()
 		{
 			break;
 		}
-		cout << "Êîðèñòóâà÷³â ç òàêèì ³ì'ÿì íåìàº";
+		cout << "ÐšÐ¾Ñ€Ð¸ÑÑ‚ÑƒÐ²Ð°Ñ‡Ñ–Ð² Ð· Ñ‚Ð°ÐºÐ¸Ð¼ Ñ–Ð¼'ÑÐ¼ Ð½ÐµÐ¼Ð°Ñ”";
 		system("pause");
 		system("cls");
 		return;
@@ -226,7 +226,7 @@ void PhoneBook::writeAbonentsToFile()
 	if ((this->wasRead && this->wasDelete) || this->wasRead)
 	{
 		char nameOfFile[260];
-		cout << "Ââåä³òü íàçâó ôàéëó ÿêèé òðåáà ñòâîðèòè àáî çíàéòè òà âíåñòè â íüîãî òåëåôîííó êíèãó(áåç \".txt\")\n";
+		cout << "Ð’Ð²ÐµÐ´Ñ–Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ñƒ Ñ„Ð°Ð¹Ð»Ñƒ ÑÐºÐ¸Ð¹ Ñ‚Ñ€ÐµÐ±Ð° ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð·Ð½Ð°Ð¹Ñ‚Ð¸ Ñ‚Ð° Ð²Ð½ÐµÑÑ‚Ð¸ Ð² Ð½ÑŒÐ¾Ð³Ð¾ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñƒ ÐºÐ½Ð¸Ð³Ñƒ(Ð±ÐµÐ· \".txt\")\n";
 		cin.getline(nameOfFile, 255);
 		strcat_s(nameOfFile, ".txt");
 		ofstream fout;
@@ -244,7 +244,7 @@ void PhoneBook::writeAbonentsToFile()
 	else
 	{
 		char nameOfFile[260];
-		cout << "Ââåä³òü íàçâó ôàéëó ÿêèé òðåáà ñòâîðèòè àáî çíàéòè òà âíåñòè â íüîãî òåëåôîííó êíèãó(áåç \".txt\")\n";
+		cout << "Ð’Ð²ÐµÐ´Ñ–Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ñƒ Ñ„Ð°Ð¹Ð»Ñƒ ÑÐºÐ¸Ð¹ Ñ‚Ñ€ÐµÐ±Ð° ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð·Ð½Ð°Ð¹Ñ‚Ð¸ Ñ‚Ð° Ð²Ð½ÐµÑÑ‚Ð¸ Ð² Ð½ÑŒÐ¾Ð³Ð¾ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñƒ ÐºÐ½Ð¸Ð³Ñƒ(Ð±ÐµÐ· \".txt\")\n";
 		cin.getline(nameOfFile, 255);
 		strcat_s(nameOfFile, ".txt");
 		ofstream fout;
@@ -267,14 +267,14 @@ void PhoneBook::writeAbonentsToFile()
 void PhoneBook::readAbonentsFromFile()
 {
 	char nameOfFile[260];
-	cout << "Ââåä³òü íàçâó ôàéëó ÿêèé òðåáà ñòâîðèòè àáî çíàéòè òà âíåñòè â íüîãî òåëåôîííó êíèãó(áåç \".txt\")\n";
+	cout << "Ð’Ð²ÐµÐ´Ñ–Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ñƒ Ñ„Ð°Ð¹Ð»Ñƒ ÑÐºÐ¸Ð¹ Ñ‚Ñ€ÐµÐ±Ð° ÑÑ‚Ð²Ð¾Ñ€Ð¸Ñ‚Ð¸ Ð°Ð±Ð¾ Ð·Ð½Ð°Ð¹Ñ‚Ð¸ Ñ‚Ð° Ð²Ð½ÐµÑÑ‚Ð¸ Ð² Ð½ÑŒÐ¾Ð³Ð¾ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñƒ ÐºÐ½Ð¸Ð³Ñƒ(Ð±ÐµÐ· \".txt\")\n";
 	cin.getline(nameOfFile, 260);
 	strcat_s(nameOfFile, ".txt");
 	ifstream fin;
 	fin.open(nameOfFile);
 	if (!fin.is_open())
 	{
-		cerr << "Ôàéë íå áûë îòêðûò, îøèáêà!\n";
+		cerr << "Ð¤Ð°Ð¹Ð» Ð½Ðµ Ð±Ñ‹Ð» Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚, Ð¾ÑˆÐ¸Ð±ÐºÐ°!\n";
 		system("pause");
 		system("cls");
 		return;

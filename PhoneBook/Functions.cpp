@@ -1,4 +1,4 @@
-#include "Functions.h"
+﻿#include "Functions.h"
 
 void SetColor(int text, int background)
 {
