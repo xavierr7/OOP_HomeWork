@@ -3,8 +3,8 @@
 int main()
 {
 
-	Fraction a(5, 7);
-	Fraction b(3, 5);
+	Fraction a(3, 4);
+	Fraction b(1, 2);
 
 	Fraction c = a + b;
 	Fraction d = a - b;

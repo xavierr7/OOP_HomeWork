@@ -25,7 +25,7 @@ int main()
 
 	// ¬веденн€ р€дка у консол≥ та його запис у зм≥нну р€дка об'Їкта за допомогою перевантаженного оператору введенн€
 	String tmp;
-	cin >> tmp;
+	//cin >> tmp;
 	cout << (tmp = tmp + str1 + str2);
 	cout << endl;
 	//
@@ -34,12 +34,20 @@ int main()
 	cout << String::GetCountOfCreatedStrings() << endl;
 	//
 
+
 	String str3;
 	String str4;
-	str3.SetStr(); //введенн€ р€дку з клав≥атури використовуючи оператор "cin"
-	str4.SetStr("AROUND");//введенн€ р€дку з клав≥атури внос€чи його €к параметр методу
-	str3.GetStr();// *
-	str4.GetStr();// * ¬иведенн€ цих р€дк≥в у консоль
+	//str3.SetStr(); //введенн€ р€дку з клав≥атури використовуючи оператор "cin"
+	//str4.SetStr("AROUND");//введенн€ р€дку з клав≥атури внос€чи його €к параметр методу
+	//str3.GetStr();// *
+	//str4.GetStr();// * ¬иведенн€ цих р€дк≥в у консоль
+
+	cout << endl << endl;
+
+	String str5 = "Mama";
+
+	cout << 3 * str5;
+
 
 	return 0;
 }

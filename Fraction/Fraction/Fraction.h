@@ -20,6 +20,7 @@ public:
 	Fraction(int numerator, int denominator) : numerator{ numerator }, wholePart{ 0 }
 	{
 		SetDenominator(denominator);
+
 	}
 	Fraction(size_t wholePart, int numerator, int denominator) : numerator{ numerator }
 	{

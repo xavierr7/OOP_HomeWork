@@ -21,6 +21,7 @@ public:
 	// Перевантажені  оператори
 	String& operator = (const String& other);
 	String operator +(const String& other);
+	String operator *(int number);
 	bool operator == (const String& other);
 	bool operator != (const String& other);
 	char& operator [] (size_t index);
@@ -33,4 +34,6 @@ public:
 	void SetStr(const char* str);
 	void GetStr();
 };
+
+String operator*(int n, String str);
 

@@ -95,6 +95,25 @@ String String::operator+(const String& other)
 	return newStr;
 }
 
+String String::operator*(int n)
+{
+	String newStr;
+
+	newStr.length = strlen(this->str);
+
+	for (size_t i = 0; i < n; i++)
+	{
+		newStr = newStr + str;
+	}
+
+	return newStr;
+}
+
+String operator*(int n, String str)
+{
+	return str * n;
+}
+
 size_t String::Length()
 {
 	return length;
@@ -114,7 +133,7 @@ bool String::operator==(const String& other)
 
 	for (size_t i = 0; i < this->length; i++)
 	{
-		if (this->str[i]!= other.str[i])
+		if (this->str[i] != other.str[i])
 		{
 			return false;
 		}
