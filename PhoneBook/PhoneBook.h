@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include"Menu.h"
 #include "Functions.h"
 #include <iostream>
@@ -48,6 +49,7 @@ class PhoneBook
 	void findAbonent();
 	void writeAbonentsToFile();
 	void readAbonentsFromFile();
+	void createNameOfFile(char& nameOFFile);
 	void print();
 
 public:

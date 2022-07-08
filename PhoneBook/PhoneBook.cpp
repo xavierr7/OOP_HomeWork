@@ -47,7 +47,7 @@ void Abonent::setFIO(const char* fio)
 	}
 	if (FIO)
 		delete FIO;
-	int len = strlen(fio) + 1;
+	size_t len = strlen(fio) + 1;
 	FIO = new char[len];
 	strcpy_s(FIO, len, fio);
 }
@@ -71,7 +71,7 @@ void Abonent::setPhone(const char* phone)
 	}
 	if (this->phone)
 		delete this->phone;
-	int len = strlen(phone) + 1;
+	size_t len = strlen(phone) + 1;
 	this->phone = new char[len];
 	strcpy_s(this->phone, len, phone);
 }
@@ -95,7 +95,7 @@ void Abonent::setInfo(const char* info)
 	}
 	if (this->info)
 		delete this->info;
-	int len = strlen(info) + 1;
+	size_t len = strlen(info) + 1;
 	this->info = new char[len];
 	strcpy_s(this->info, len, info);
 }
@@ -223,12 +223,10 @@ void PhoneBook::findAbonent()
 
 void PhoneBook::writeAbonentsToFile()
 {
-	if ((this->wasRead && this->wasDelete) || this->wasRead)
+	if (this->wasRead || (this->wasRead && this->wasDelete))
 	{
 		char nameOfFile[260];
-		cout << "Введіть назву файлу який треба створити або знайти та внести в нього телефонну книгу(без \".txt\")\n";
-		cin.getline(nameOfFile, 255);
-		strcat_s(nameOfFile, ".txt");
+		createNameOfFile(*nameOfFile);
 		ofstream fout;
 		fout.open(nameOfFile);
 		for (size_t i = 0; i < size; i++)
@@ -244,9 +242,7 @@ void PhoneBook::writeAbonentsToFile()
 	else
 	{
 		char nameOfFile[260];
-		cout << "Введіть назву файлу який треба створити або знайти та внести в нього телефонну книгу(без \".txt\")\n";
-		cin.getline(nameOfFile, 255);
-		strcat_s(nameOfFile, ".txt");
+		createNameOfFile(*nameOfFile);
 		ofstream fout;
 		fout.open(nameOfFile, ofstream::app);
 		for (size_t i = 0; i < size; i++)
@@ -267,9 +263,7 @@ void PhoneBook::writeAbonentsToFile()
 void PhoneBook::readAbonentsFromFile()
 {
 	char nameOfFile[260];
-	cout << "Введіть назву файлу який треба створити або знайти та внести в нього телефонну книгу(без \".txt\")\n";
-	cin.getline(nameOfFile, 260);
-	strcat_s(nameOfFile, ".txt");
+	createNameOfFile(*nameOfFile);
 	ifstream fin;
 	fin.open(nameOfFile);
 	if (!fin.is_open())
@@ -317,7 +311,6 @@ void PhoneBook::readAbonentsFromFile()
 				s = 0;
 			}
 
-
 			abonent.setPhone(tmp);
 
 			char tmp3[355];
@@ -352,4 +345,11 @@ void PhoneBook::readAbonentsFromFile()
 	}
 	fin.close();
 	this->wasRead = true;
+}
+
+void PhoneBook::createNameOfFile(char& nameOfFile)
+{
+	cout << "Введіть назву файлу який треба створити або знайти та внести в нього телефонну книгу(без \".txt\")\n";
+	cin.getline(&nameOfFile, 255);
+	strcat(&nameOfFile, ".txt");
 }
