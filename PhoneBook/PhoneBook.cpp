@@ -175,6 +175,10 @@ void PhoneBook::addAbonent()
 
 void PhoneBook::delAbonent()
 {
+	if (size == 0)
+	{
+		return;
+	}
 	vector<string> delList;
 	for (size_t i = 0; i < size; i++)
 	{
@@ -204,7 +208,7 @@ void PhoneBook::findAbonent()
 		{
 			break;
 		}
-		cout << "Користувачів з таким ім'ям немає";
+		cout << "Абонентів з таким ім'ям немає";
 		system("pause");
 		system("cls");
 		return;
