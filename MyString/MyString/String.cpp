@@ -2,29 +2,17 @@
 
 size_t String::countOfCreatedStrings = 0;
 
-//String::String()
-//{
-//	str = nullptr;
-//	length = 0;
-//}
-
-String::String(int length)
+String::String()
 {
-	this->length = length;
-	str = new char[length + 1];
-	str[0] = '\0';
-	++countOfCreatedStrings;
+	str = nullptr;
+	length = 0;
 }
 
 String::String(const char* str)
 {
 	length = strlen(str);
 	this->str = new char[length+1];
-	for (size_t i = 0; i < length; i++)
-	{
-		this->str[i] = str[i];
-	}
-	this->str[length] = '\0';
+	strcpy(this->str, str);
 	++countOfCreatedStrings;
 }
 
@@ -38,12 +26,7 @@ String::String(const String& other)
 {
 	length = strlen(other.str);
 	this->str = new char[length + 1];
-	for (size_t i = 0; i < length; i++)
-	{
-		this->str[i] = other.str[i];
-	}
-
-	this->str[length] = '\0';
+	strcpy(this->str, other.str);
 }
 
 String::String(String&& other)
@@ -63,11 +46,7 @@ String& String::operator=(const String& other)
 
 	length = strlen(other.str);
 	this->str = new char[length + 1];
-	for (size_t i = 0; i < length; i++)
-	{
-		this->str[i] = other.str[i];
-	}
-	this->str[length] = '\0';
+	strcpy(this->str, other.str);
 	return *this;
 }
 
@@ -78,19 +57,9 @@ String String::operator+(const String& other)
 	newStr.length = strlen(this->str) + strlen(other.str);
 	newStr.str = new char[newStr.length + 1];
 
-	for (size_t i = 0, j = 0; i < newStr.length; i++)
-	{
-		if (i < strlen(this->str))
-		{
-			newStr.str[i] = this->str[i];
-		}
-		else
-		{
-			newStr.str[i] = other.str[j];
-			++j;
-		}
-	}
-	newStr.str[newStr.length] = '\0';
+	strcpy(newStr.str, this->str);
+	strcat(newStr.str, other.str);
+
 	countOfCreatedStrings++;
 	return newStr;
 }
@@ -130,7 +99,6 @@ bool String::operator==(const String& other)
 	{
 		return false;
 	}
-
 	for (size_t i = 0; i < this->length; i++)
 	{
 		if (this->str[i] != other.str[i])
@@ -187,27 +155,4 @@ std::istream& operator >> (std::istream& in, String& obj)
 
 	free(inputData);
 	return in;
-}
-
-void String::SetStr()
-{
-	String newStr;
-	cout << "Input string\n";
-	cin >> newStr;
-	*this = newStr;
-}
-
-void String::SetStr(const char* str)
-{
-	length = strlen(str);
-	for (size_t i = 0; i < length; i++)
-	{
-		this->str[i] = str[i];
-	}
-	this->str[length] = '\0';
-}
-
-void String::GetStr()
-{
-	cout << this->str << endl;
 }
