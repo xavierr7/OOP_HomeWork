@@ -10,6 +10,9 @@ class String
 	char* str;
 	size_t length;
 	static size_t countOfCreatedStrings;
+
+	void makeNewStr(const char*);
+
 public:
 	String();
 	String(const char* str);
@@ -30,6 +33,7 @@ public:
 
 	size_t Length();
 	static size_t GetCountOfCreatedStrings();
+
 };
 
 String operator*(int n, String str);

@@ -8,25 +8,28 @@ String::String()
 	length = 0;
 }
 
+void String::makeNewStr(const char* newStr)
+{
+	length = strlen(newStr);
+	this->str = new char[length + 1];
+	strcpy(this->str, newStr);
+}
+
 String::String(const char* str)
 {
-	length = strlen(str);
-	this->str = new char[length+1];
-	strcpy(this->str, str);
+	makeNewStr(str);
 	++countOfCreatedStrings;
 }
 
 String::~String()
 {
-	delete[] this->str;
+	delete this->str;
 	--countOfCreatedStrings;
 }
 
 String::String(const String& other)
 {
-	length = strlen(other.str);
-	this->str = new char[length + 1];
-	strcpy(this->str, other.str);
+	makeNewStr(other.str);
 }
 
 String::String(String&& other)
@@ -41,12 +44,10 @@ String& String::operator=(const String& other)
 {
 	if (this->str != nullptr)
 	{
-		delete[]str;
+		delete str;
 	}
 
-	length = strlen(other.str);
-	this->str = new char[length + 1];
-	strcpy(this->str, other.str);
+	makeNewStr(other.str);
 	return *this;
 }
 
@@ -95,18 +96,14 @@ size_t String::GetCountOfCreatedStrings()
 
 bool String::operator==(const String& other)
 {
-	if (this->length != other.length)
+	if (strcmp(this->str, other.str) != NULL)
 	{
 		return false;
 	}
-	for (size_t i = 0; i < this->length; i++)
+	else
 	{
-		if (this->str[i] != other.str[i])
-		{
-			return false;
-		}
+		return true;
 	}
-	return true;
 }
 
 bool String::operator!=(const String& other)
@@ -127,7 +124,6 @@ std::ostream& operator<<(std::ostream& out, const String& str)
 
 std::istream& operator >> (std::istream& in, String& obj)
 {
-	
 	char* inputData = nullptr;
 	int counter = 0;
 	char symbol;
