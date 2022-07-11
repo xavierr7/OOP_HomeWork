@@ -95,9 +95,18 @@ String String::operator+=(const String& other)
 	return *this = *this + other;
 }
 
+bool String::operator==(const String& other)
+{
+	return (strcmp(this->str, other.str) != NULL) ? false : true;
+}
+
+bool String::operator!=(const String& other)
+{
+	return !(this->operator==(other));
+}
+
 bool String::operator<(const String& other)
 {
-
 	return (strcmp(this->str, other.str) > NULL) ? true : false;
 }
 
@@ -108,22 +117,22 @@ bool String::operator>(const String& other)
 
 bool String::operator<=(const String& other)
 {
-	return (*this == other && *this > other) ? false : true;
+	if (*this == other)
+		return true;
+	else if ( *this < other)
+		return true;
+	else
+		return false;
 }
 
 bool String::operator>=(const String& other)
 {
-	return (*this == other && *this < other) ? false : true;
-}
-
-bool String::operator==(const String& other)
-{
-	return (strcmp(this->str, other.str) != NULL) ? true  : false;
-}
-
-bool String::operator!=(const String& other)
-{
-	return !(this->operator==(other));
+	if (*this == other)
+		return true;
+	else if (*this > other)
+		return true;
+	else
+		return false;
 }
 
 char& String::operator [] (size_t index)

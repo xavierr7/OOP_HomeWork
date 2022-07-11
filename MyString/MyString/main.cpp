@@ -8,10 +8,10 @@ int main()
 	//
 
 	String str2;
-	str2 = "Hello";
+	//str2 = "Hello";
 	//
 
-	String result = str1 + str2;
+	//String result = str1 + str2;
 	
 	//cout << result << endl;
 	//
@@ -26,7 +26,7 @@ int main()
 	//
 
 	
-	cout << (str1 >= "Hellcjnsjkcnjso");
+	cout << (str1 >= "Hello");
 
 
 	
