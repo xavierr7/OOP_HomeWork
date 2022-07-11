@@ -8,13 +8,6 @@ String::String()
 	length = 0;
 }
 
-void String::makeNewStr(const char* newStr)
-{
-	length = strlen(newStr);
-	this->str = new char[length + 1];
-	strcpy(this->str, newStr);
-}
-
 String::String(const char* str)
 {
 	makeNewStr(str);
@@ -64,6 +57,19 @@ String String::operator+(const String& other)
 	countOfCreatedStrings++;
 	return newStr;
 }
+String String::operator+(const char* str)
+{
+	String newStr;
+
+	newStr.length = strlen(this->str) + strlen(str);
+	newStr.str = new char[newStr.length + 1];
+
+	strcpy(newStr.str, this->str);
+	strcat(newStr.str, str);
+
+	countOfCreatedStrings++;
+	return newStr;
+}
 
 String String::operator*(int n)
 {
@@ -84,26 +90,35 @@ String operator*(int n, String str)
 	return str * n;
 }
 
-size_t String::Length()
+String String::operator+=(const String& other)
 {
-	return length;
+	return *this = *this + other;
 }
 
-size_t String::GetCountOfCreatedStrings()
+bool String::operator<(const String& other)
 {
-	return countOfCreatedStrings;
+
+	return (strcmp(this->str, other.str) > NULL) ? true : false;
+}
+
+bool String::operator>(const String& other)
+{
+	return (strcmp(this->str, other.str) < NULL) ? true : false;
+}
+
+bool String::operator<=(const String& other)
+{
+	return (*this == other && *this > other) ? false : true;
+}
+
+bool String::operator>=(const String& other)
+{
+	return (*this == other && *this < other) ? false : true;
 }
 
 bool String::operator==(const String& other)
 {
-	if (strcmp(this->str, other.str) != NULL)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+	return (strcmp(this->str, other.str) != NULL) ? true  : false;
 }
 
 bool String::operator!=(const String& other)
@@ -151,4 +166,21 @@ std::istream& operator >> (std::istream& in, String& obj)
 
 	free(inputData);
 	return in;
+}
+
+void String::makeNewStr(const char* newStr)
+{
+	length = strlen(newStr);
+	this->str = new char[length + 1];
+	strcpy(this->str, newStr);
+}
+
+size_t String::Length()
+{
+	return length;
+}
+
+size_t String::GetCountOfCreatedStrings()
+{
+	return countOfCreatedStrings;
 }
