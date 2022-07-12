@@ -14,6 +14,14 @@ String::String(const char* str)
 	++countOfCreatedStrings;
 }
 
+String::String(String&& other)noexcept
+{
+	this->length = other.length;
+	this->str = other.str;
+
+	other.str = nullptr;
+}
+
 String::~String()
 {
 	delete this->str;
@@ -23,15 +31,9 @@ String::~String()
 String::String(const String& other)
 {
 	makeNewStr(other.str);
-}
+};
 
-String::String(String&& other)
-{
-	this->length = other.length;
-	this->str = other.str;
 
-	other.str = nullptr;
-}
 
 String& String::operator=(const String& other)
 {
