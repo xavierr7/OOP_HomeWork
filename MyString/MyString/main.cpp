@@ -4,11 +4,11 @@
 int main()
 {
 
-	String str1("Hello");
+	String str1("Hello new World new Round");
 	//
 
 	String str2;
-	//str2 = "Hello";
+	str2 = "new";
 	//
 
 	//String result = str1 + str2;
@@ -25,12 +25,12 @@ int main()
 	//cout << (str1 + " World!") << endl;
 	//
 
+	//cout << (str1 < "Helcsdjnsiujchbuioyhgcbouibcjslhbcsouiyguofsgyfudsblo");
+
+	str1 -= str2;
+	cout << str1;
+
 	
-	cout << (str1 >= "Hello");
-
-
-	
-
 
 	return 0;
 }

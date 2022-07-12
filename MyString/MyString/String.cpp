@@ -90,6 +90,42 @@ String operator*(int n, String str)
 	return str * n;
 }
 
+String String::operator-(const String& other)
+{
+	if (*this == other)
+	{
+		return "";
+	}
+	String newStr = *this;
+	char* p;
+	char* tmp = new char[this->length];
+	int i = 0;
+	while ((p = strstr(newStr.str, other.str)) != NULL)
+	{
+		char* pStr = &newStr.str[i];
+		for (; pStr < p; pStr++, ++i)
+		{
+			tmp[i] = *pStr;
+		}
+	
+		pStr += other.length;
+		tmp[newStr.length - other.length] = '\0';
+		for (; pStr < &newStr.str[newStr.length]; pStr++, ++i)
+		{
+			tmp[i] = *pStr;
+		}
+		i = 0;
+		newStr = tmp;
+	}
+	delete[] tmp;
+	return newStr;
+}
+String String::operator -=(const String& other)
+{
+	return *this = *this - other;
+}
+
+
 String String::operator+=(const String& other)
 {
 	return *this = *this + other;
@@ -102,24 +138,31 @@ bool String::operator==(const String& other)
 
 bool String::operator!=(const String& other)
 {
-	return !(this->operator==(other));
+	return !(* this == other);
 }
 
 bool String::operator<(const String& other)
 {
-	return (strcmp(this->str, other.str) > NULL) ? true : false;
+	if (*this == other)
+		return false;
+	else if (strcmp(this->str, other.str) > NULL)
+		return true;
+	else
+		return false;
 }
 
 bool String::operator>(const String& other)
 {
-	return (strcmp(this->str, other.str) < NULL) ? true : false;
+	if (*this == other)
+		return false;
+	return !(*this < other);
 }
 
 bool String::operator<=(const String& other)
 {
 	if (*this == other)
 		return true;
-	else if ( *this < other)
+	else if (strcmp(this->str, other.str) > NULL)
 		return true;
 	else
 		return false;
@@ -129,15 +172,24 @@ bool String::operator>=(const String& other)
 {
 	if (*this == other)
 		return true;
-	else if (*this > other)
-		return true;
-	else
-		return false;
+	return !(*this <=other);
 }
 
 char& String::operator [] (size_t index)
 {
 	return this->str[index];
+}
+
+void String::operator()(const String& other)
+{
+	*this = other;
+}
+
+String::operator char* ()
+{
+	char* str = new char[this->length + 1];
+	strcpy(str, this->str);
+	return str;
 }
 
 std::ostream& operator<<(std::ostream& out, const String& str)

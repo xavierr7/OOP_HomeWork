@@ -24,10 +24,12 @@ public:
 
 	String& operator = (const String& other);
 	String operator +(const String& other);
-	String operator +(const char* str);// насправді в ньому сенсу ніби як немає, бо якщо додати до об'єкту классу звичайний рядок, то компілятор сприйме цей рядок як об'єкт цього класу
+	String operator +(const char* str);// насправді в ньому сенсу немає, бо якщо додати до об'єкту классу звичайний рядок, то компілятор сприйме цей рядок як об'єкт цього класу
 					 // і під час виконання дії потрапить у перевантажений оператор "+" об'єкту з обє'ктом. Тому я думаю що усі інші оператори немає 
-					 // сенсу робити в такому вигляді(але якщо потрібно я звісно можу зробити, просто це буде суцільний копіпаст, там нічим не відрізняється реалізація, зайвий код)
+					 // сенсу робити в такому вигляді, бо спрацює так само(але якщо потрібно я звісно можу зробити, просто це буде суцільний копіпаст, там нічим не відрізняється реалізація, зайвий код)
 	String operator *(int number);
+	String operator -(const String& other);
+	String operator -=(const String& other);
 	String operator +=(const String& other);
 	bool operator == (const String& other);
 	bool operator != (const String& other);
@@ -36,6 +38,8 @@ public:
 	bool operator<=(const String& other);
 	bool operator >= (const String& other);
 	char& operator [] (size_t index);
+	void operator()(const String& other);
+	operator char* ();
 	friend std::ostream& operator << (std::ostream& out, const String& str);
 	friend std::istream& operator >> (std::istream& out, String& str);
 
