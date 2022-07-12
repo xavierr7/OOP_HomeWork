@@ -6,13 +6,15 @@ using std::endl;
 
 class Fraction
 {
-	size_t wholePart;
+	int wholePart;
 	int numerator;
 	int denominator;
 
 	void Simplify(Fraction& newFrac);
 	void WholePart(Fraction& newFrac);
-	void conversionToImproperFraction(Fraction& newFrac);
+	void conversion(Fraction& newFrac);
+	void conversionToImproperFraction(Fraction& This, Fraction& other);
+	void correctFrac(Fraction& newFrac);
 
 public:
 	Fraction() : numerator{ 1 }, denominator{ 1 }, wholePart{ 0 } {}
@@ -22,30 +24,44 @@ public:
 		SetDenominator(denominator);
 
 	}
-	Fraction(size_t wholePart, int numerator, int denominator) : numerator{ numerator }
+	Fraction(int wholePart, int numerator, int denominator) : numerator{ numerator }
 	{
 		SetWholePart(wholePart);
 		SetDenominator(denominator);
 	}
 
-	Fraction operator + (Fraction& other);
-	Fraction operator - (Fraction& other);
-	Fraction operator * (Fraction& other);
-	Fraction operator / (Fraction& other);
+	Fraction operator + (Fraction other);
+	Fraction operator - (Fraction other);
+	Fraction operator * (Fraction other);
+	Fraction operator / (Fraction other);
+	Fraction operator += (Fraction other);
+	Fraction operator -= (Fraction other);
+	Fraction operator *= (Fraction other);
+	Fraction operator /= (Fraction other);
+	Fraction operator-();
+	Fraction& operator++();
+	Fraction operator++(int);
+	Fraction& operator--();
+	Fraction operator--(int);
+
+
+	bool operator <(Fraction other);
+	bool operator >(Fraction other);
+	bool operator ==(Fraction other);
+	bool operator !=(Fraction other);
+	bool operator <=(Fraction other);
+	bool operator >=(Fraction other);
+
 	Fraction& operator = (const Fraction& other);
 	friend std::ostream& operator << (std::ostream& out, const Fraction& fraction);
 
-	void SetWholePart(size_t wholePart)
+	void SetWholePart(int wholePart)
 	{
-		if (wholePart < 0)
-		{
-			return;
-		}
 		this->wholePart = wholePart;
 	}
 	void SetNumerator(int numerator)
 	{
-		this->numerator;
+		this->numerator = numerator;
 	}
 	void SetDenominator(int denominator)
 	{
@@ -56,7 +72,7 @@ public:
 		this->denominator = denominator;
 	}
 
-	size_t GetWholePart()
+	int GetWholePart()
 	{
 		return wholePart;
 	}

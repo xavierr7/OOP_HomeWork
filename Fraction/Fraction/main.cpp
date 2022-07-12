@@ -3,18 +3,22 @@
 int main()
 {
 
-	Fraction a(3, 4);
-	Fraction b(1, 2);
+	Fraction a(2, 3, 8);
+	Fraction b(3, 19, 8);
 
+	
 	Fraction c = a + b;
 	Fraction d = a - b;
 	Fraction e = a * b;
 	Fraction f = a / b;
 
-	cout << c;
-	cout << d;
-	cout << e;
-	cout << f;
+	
+	cout << c << endl;
+	cout << d << endl;
+	cout << e << endl;
+	cout << f << endl;
+
+	//cout << (a == b);
 
 	return 0;
 }

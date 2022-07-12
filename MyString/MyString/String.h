@@ -45,6 +45,7 @@ public:
 	size_t Length();
 	static size_t GetCountOfCreatedStrings();
 
+	//String operator* (const String str);
 };
 
 String operator*(int n, String str);

@@ -4,18 +4,18 @@
 int main()
 {
 
-	String str1("Hello new World new Round");
+	String str1("helcsdjnsiujchbuioyhgcbouibcjslhbcsouiyguofsgyfudsblo");
 	//
 
 	String str2;
-	str2 = "new";
+	str2 = "rgfas34";
 	//
 
 	//String result = str1 + str2;
 	
 	//cout << result << endl;
 	//
-	String tmp = "MAD";
+	String tmp ;
 	//cin >> tmp;
 	//cout << (tmp += str1 + str2);
 	// << endl;
@@ -25,12 +25,13 @@ int main()
 	//cout << (str1 + " World!") << endl;
 	//
 
-	//cout << (str1 < "Helcsdjnsiujchbuioyhgcbouibcjslhbcsouiyguofsgyfudsblo");
+	cout << (str1 < "sdqcg");
 
-	str1 -= str2;
-	cout << str1;
+	//str1 -= str2;
+	//cout << str1;
 
-	
+	/*tmp = str1 * str2;
+	cout << tmp;*/
 
 	return 0;
 }

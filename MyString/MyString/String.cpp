@@ -245,3 +245,8 @@ size_t String::GetCountOfCreatedStrings()
 {
 	return countOfCreatedStrings;
 }
+
+//String String::operator*(const String str)
+//{
+//	
+//}
