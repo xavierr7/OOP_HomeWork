@@ -33,8 +33,6 @@ String::String(const String& other)
 	makeNewStr(other.str);
 };
 
-
-
 String& String::operator=(const String& other)
 {
 	if (this->str != nullptr)
