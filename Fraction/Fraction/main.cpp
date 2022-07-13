@@ -18,7 +18,15 @@ int main()
 	cout << e << endl;
 	cout << f << endl;
 
-	//cout << (a == b);
+	cout << endl << endl;
+
+	cout << (a == b)<< endl;
+	cout << (a != b) << endl;
+	cout << (a > b) << endl;
+	cout << (a < b) << endl;
+	cout << (a >= b) << endl;
+	cout << (a <= b) << endl;
+
 
 	return 0;
 }

@@ -19,7 +19,6 @@ void Fraction::Simplify(Fraction& newFrac)
 		{
 			newFrac.numerator = 1;
 			newFrac.denominator = 1;
-			newFrac.wholePart = 0;
 		}
 	}
 }
@@ -80,6 +79,23 @@ void Fraction::conversionToImproperFraction(Fraction& This, Fraction& other)
 	}
 }
 
+bool Fraction::Simpilify_lowestCommonDen(Fraction& tmp1, Fraction& tmp2)
+{
+	Simplify(tmp1);
+	Simplify(tmp2);
+
+	int tmpDenominator = tmp1.denominator;
+	tmp1.numerator *= tmp2.denominator;
+	tmp1.denominator *= tmp2.denominator;
+	tmp2.numerator *= tmpDenominator;
+	tmp2.denominator *= tmpDenominator;
+
+	if (tmp1.numerator == tmp2.numerator && tmp1.denominator == tmp2.denominator)
+		return true;
+	else
+		return false;
+}
+
 Fraction Fraction::operator+( Fraction other)
 {
 	Fraction newFraction;
@@ -133,8 +149,8 @@ Fraction Fraction::operator*(Fraction other)
 
 	conversionToImproperFraction(tmp, other);
 
-	newFraction.numerator = numerator * other.numerator;
-	newFraction.denominator = denominator * other.denominator;
+	newFraction.numerator = tmp.numerator * other.numerator;
+	newFraction.denominator = tmp.denominator * other.denominator;
 	correctFrac(newFraction);
 	return newFraction;
 }
@@ -146,8 +162,8 @@ Fraction Fraction::operator/(Fraction other)
 
 	conversionToImproperFraction(tmp, other);
 
-	newFraction.numerator = numerator * other.denominator;
-	newFraction.denominator = denominator * other.numerator;
+	newFraction.numerator = tmp.numerator * other.denominator;
+	newFraction.denominator = tmp.denominator * other.numerator;
 	correctFrac(newFraction);
 	return newFraction;
 }
@@ -179,9 +195,17 @@ Fraction Fraction::operator-()
 	{
 		return Fraction(-wholePart, numerator, denominator);
 	}
-	else
+	else if (wholePart < 0)
+	{
+		return Fraction(wholePart, numerator, denominator);
+	}
+	else if(numerator > 0)
 	{
 		return Fraction(-numerator, denominator);
+	}
+	else if (numerator < 0)
+	{
+		return Fraction(numerator, denominator);
 	}
 }
 
@@ -235,7 +259,14 @@ Fraction Fraction::operator--(int)
 
 bool Fraction::operator<(Fraction other)
 {
-	if (wholePart != 0 || other.wholePart != 0)
+	if (wholePart != 0 && other.wholePart != 0)
+	{
+		if (wholePart > other.wholePart)
+			return false;
+		else
+			return true;
+	}
+	else if(wholePart != 0 || other.wholePart != 0)
 	{
 		if (wholePart != 0)
 		{
@@ -251,13 +282,6 @@ bool Fraction::operator<(Fraction other)
 			else
 				return false;
 		}
-	}
-	else if(wholePart != 0 && other.wholePart != 0)
-	{
-		if (wholePart > other.wholePart)
-			return false;
-		else
-			return true;
 	}
 	Fraction tmp(*this);
 
@@ -287,19 +311,7 @@ bool Fraction::operator==(Fraction other)
 		conversion(tmp1);
 		conversion(tmp2);
 
-		Simplify(tmp1);
-		Simplify(tmp2);
-
-		int tmpDenominator = tmp1.denominator;
-		tmp1.numerator *= tmp2.denominator;
-		tmp1.denominator *= tmp2.denominator;
-		tmp2.numerator *= tmpDenominator;
-		tmp2.denominator *= tmpDenominator;
-
-		if (tmp1.numerator == tmp2.numerator && tmp1.denominator == tmp2.denominator)
-			return true;
-		else
-			return false;
+		return Simpilify_lowestCommonDen(tmp1, tmp2);
 	}
 	else if (wholePart != 0 || other.wholePart != 0)
 	{
@@ -308,19 +320,7 @@ bool Fraction::operator==(Fraction other)
 		else
 			conversion(tmp2);
 
-		Simplify(tmp1);
-		Simplify(tmp2);
-
-		int tmpDenominator = tmp1.denominator;
-		tmp1.numerator *= tmp2.denominator;
-		tmp1.denominator *= tmp2.denominator;
-		tmp2.numerator *= tmpDenominator;
-		tmp2.denominator *= tmpDenominator;
-
-		if (tmp1.numerator == tmp2.numerator && tmp1.denominator == tmp2.denominator)
-			return true;
-		else
-			return false;
+		return Simpilify_lowestCommonDen(tmp1, tmp2);
 	}
 	Fraction tmp(*this);
 	Simplify(tmp);
@@ -352,20 +352,19 @@ bool Fraction::operator>=(Fraction other)
 	return !(*this <= other);
 }
 
-Fraction& Fraction::operator=(const Fraction& other)
-{
-	this->numerator = other.numerator;
-	this->denominator = other.denominator;
-	this->wholePart = other.wholePart;
-	return *this;
-}
-
 std::ostream& operator<<(std::ostream& out, const Fraction& fraction)
 {
 	if (fraction.wholePart != 0)
 	{
-		out << "whole part|numerator/denominator\n";
-		out << fraction.wholePart << "|" << fraction.numerator << "/" << fraction.denominator;
+		if (fraction.denominator == 1)
+		{
+			out << fraction.wholePart;
+		}
+		else
+		{
+			out << "whole part|numerator/denominator\n";
+			out << fraction.wholePart << "|" << fraction.numerator << "/" << fraction.denominator;
+		}
 	}
 	else
 	{
