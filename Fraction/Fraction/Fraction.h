@@ -10,12 +10,12 @@ class Fraction
 	int numerator;
 	int denominator;
 
-	void Simplify(Fraction& newFrac);
-	void WholePart(Fraction& newFrac);
-	void conversion(Fraction& newFrac);
-	void conversionToImproperFraction(Fraction& This, Fraction& other);
-	void correctFrac(Fraction& newFrac);
-	bool Simpilify_lowestCommonDen(Fraction& tmp1, Fraction& tmp2);
+	void Simplify();
+	void WholePart();
+	void conversion();
+	void conversionToImproperFraction( Fraction& other);
+	void correctFrac();
+	bool Simpilify_lowestCommonDen( Fraction& tmp2);
 
 public:
 	Fraction() : numerator{ 1 }, denominator{ 1 }, wholePart{ 0 } {}

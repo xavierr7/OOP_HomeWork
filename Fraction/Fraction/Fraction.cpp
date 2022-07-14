@@ -1,6 +1,6 @@
 #include "Fraction.h"
 
-void Fraction::Simplify(Fraction& newFrac)
+void Fraction::Simplify()
 {
 	int act = 1;
 	while (act !=0)
@@ -8,89 +8,89 @@ void Fraction::Simplify(Fraction& newFrac)
 		act = 0;
 		for (size_t i = 2; i <= 10; i++)
 		{
-			if (newFrac.numerator % i == 0 && newFrac.denominator % i == 0)
+			if (this->numerator % i == 0 && this->denominator % i == 0)
 			{
-				newFrac.numerator /= i;
-				newFrac.denominator /= i;
+				this->numerator /= i;
+				this->denominator /= i;
 				++act;
 			}
 		}
-		if (newFrac.numerator == newFrac.denominator)
+		if (this->numerator == this->denominator)
 		{
-			newFrac.numerator = 1;
-			newFrac.denominator = 1;
+			this->numerator = 1;
+			this->denominator = 1;
 		}
 	}
 }
 
-void Fraction::WholePart(Fraction& newFrac)
+void Fraction::WholePart()
 {
-	if ((newFrac.numerator / newFrac.denominator) >= 1)
+	if ((this->numerator / this->denominator) >= 1)
 	{
 		int count = 0;
-		int tmp = newFrac.numerator;
+		int tmp = this->numerator;
 		while (true)
 		{
-			if (tmp % newFrac.denominator != 0)
+			if (tmp % this->denominator != 0)
 			{
 				++count;
 				--tmp;
 			}
 			else
 			{
-				newFrac.wholePart = (newFrac.numerator - count) / newFrac.denominator;
-				newFrac.numerator = newFrac.numerator - (newFrac.numerator - count);
+				this->wholePart = (this->numerator - count) / this->denominator;
+				this->numerator = this->numerator - (this->numerator - count);
 				break;
 			}
 		}
 	}
 }
 
-void Fraction::correctFrac(Fraction& newFrac)
+void Fraction::correctFrac()
 {
-	Simplify(newFrac);
-	WholePart(newFrac);
+	this->Simplify();
+	this->WholePart();
 }
 
-void Fraction::conversion(Fraction& newFrac)
+void Fraction::conversion()
 {
-	newFrac.numerator = newFrac.wholePart * newFrac.denominator + newFrac.numerator;
-	newFrac.wholePart = 0;
+	this->numerator = this->wholePart * this->denominator + this->numerator;
+	this->wholePart = 0;
 }
 
-void Fraction::conversionToImproperFraction(Fraction& This, Fraction& other)
+void Fraction::conversionToImproperFraction(Fraction& other)
 {
-	if (This.wholePart != 0 && other.wholePart != 0)
+	if (this->wholePart != 0 && other.wholePart != 0)
 	{
-		conversion(This);
-		conversion(other);
+		this->conversion();
+		other.conversion();
 
 	}
-	else if (This.wholePart != 0 || other.wholePart != 0)
+	else if (this->wholePart != 0 || other.wholePart != 0)
 	{
-		if (This.wholePart != 0)
+		if (this->wholePart != 0)
 		{
-			conversion(This);
+			this->conversion();
 		}
 		else
 		{
-			conversion(other);
+			other.conversion();
 		}
 	}
 }
 
-bool Fraction::Simpilify_lowestCommonDen(Fraction& tmp1, Fraction& tmp2)
+bool Fraction::Simpilify_lowestCommonDen( Fraction& tmp2)
 {
-	Simplify(tmp1);
-	Simplify(tmp2);
+	this->Simplify();
+	tmp2.Simplify();
 
-	int tmpDenominator = tmp1.denominator;
-	tmp1.numerator *= tmp2.denominator;
-	tmp1.denominator *= tmp2.denominator;
+	int tmpDenominator = this->denominator;
+	this->numerator *= tmp2.denominator;
+	this->denominator *= tmp2.denominator;
 	tmp2.numerator *= tmpDenominator;
 	tmp2.denominator *= tmpDenominator;
 
-	if (tmp1.numerator == tmp2.numerator && tmp1.denominator == tmp2.denominator)
+	if (this->numerator == tmp2.numerator && this->denominator == tmp2.denominator)
 		return true;
 	else
 		return false;
@@ -101,19 +101,19 @@ Fraction Fraction::operator+( Fraction other)
 	Fraction newFraction;
 	Fraction tmp(*this);
 
-	conversionToImproperFraction(tmp,other);
+	tmp.conversionToImproperFraction(other);
 
 	if (tmp.denominator == other.denominator)
 	{
 		newFraction.numerator = tmp.numerator + other.numerator;
 		newFraction.denominator = tmp.denominator;
-		correctFrac(newFraction);
+		newFraction.correctFrac();
 	}
 	else
 	{
 		newFraction.numerator = tmp.numerator * other.denominator + other.numerator * tmp.denominator;
 		newFraction.denominator = tmp.denominator * other.denominator;
-		correctFrac(newFraction);
+		newFraction.correctFrac();
 	}
 
 	return newFraction;
@@ -124,19 +124,19 @@ Fraction Fraction::operator-(Fraction other)
 	Fraction newFraction;
 	Fraction tmp(*this);
 
-	conversionToImproperFraction(tmp, other);
+	tmp.conversionToImproperFraction( other);
 
 	if (tmp.denominator == other.denominator)
 	{
 		newFraction.numerator = tmp.numerator - other.numerator;
 		newFraction.denominator = tmp.denominator;
-		correctFrac(newFraction);
+		newFraction.correctFrac();
 	}
 	else
 	{
 		newFraction.numerator = tmp.numerator * other.denominator - other.numerator * tmp.denominator;
 		newFraction.denominator = tmp.denominator * other.denominator;
-		correctFrac(newFraction);
+		newFraction.correctFrac();
 	}
 
 	return newFraction;
@@ -147,11 +147,11 @@ Fraction Fraction::operator*(Fraction other)
 	Fraction newFraction;
 	Fraction tmp(*this);
 
-	conversionToImproperFraction(tmp, other);
+	tmp.conversionToImproperFraction( other);
 
 	newFraction.numerator = tmp.numerator * other.numerator;
 	newFraction.denominator = tmp.denominator * other.denominator;
-	correctFrac(newFraction);
+	newFraction.correctFrac();
 	return newFraction;
 }
 
@@ -160,11 +160,11 @@ Fraction Fraction::operator/(Fraction other)
 	Fraction newFraction;
 	Fraction tmp(*this);
 
-	conversionToImproperFraction(tmp, other);
+	tmp.conversionToImproperFraction( other);
 
 	newFraction.numerator = tmp.numerator * other.denominator;
 	newFraction.denominator = tmp.denominator * other.numerator;
-	correctFrac(newFraction);
+	newFraction.correctFrac();
 	return newFraction;
 }
 
@@ -217,7 +217,7 @@ Fraction& Fraction::operator++()
 		return *this;
 	}
 	numerator += denominator;
-	correctFrac(*this);
+	this->correctFrac();
 	return *this;
 }
 
@@ -230,7 +230,7 @@ Fraction Fraction::operator++(int)
 	}
 	Fraction temp(*this);
 	numerator += denominator;
-	correctFrac(*this);
+	this->correctFrac();
 	return temp;
 }
 
@@ -308,23 +308,23 @@ bool Fraction::operator==(Fraction other)
 
 	if (wholePart != 0 && other.wholePart != 0)
 	{
-		conversion(tmp1);
-		conversion(tmp2);
+		tmp1.conversion();
+		tmp2.conversion();
 
-		return Simpilify_lowestCommonDen(tmp1, tmp2);
+		return tmp1.Simpilify_lowestCommonDen(tmp2);
 	}
 	else if (wholePart != 0 || other.wholePart != 0)
 	{
 		if (wholePart != 0)
-			conversion(tmp1);
+			tmp1.conversion();
 		else
-			conversion(tmp2);
+			tmp2.conversion();
 
-		return Simpilify_lowestCommonDen(tmp1, tmp2);
+		return tmp1.Simpilify_lowestCommonDen(tmp2);
 	}
 	Fraction tmp(*this);
-	Simplify(tmp);
-	Simplify(other);
+	tmp.Simplify();
+	other.Simplify();
 	if (tmp.numerator == other.numerator && tmp.denominator == other.denominator)
 		return true;
 	return false;
