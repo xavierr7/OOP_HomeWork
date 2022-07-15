@@ -1,7 +1,9 @@
 #include "House.h"
 
+uint16_t House::countOfPeople = 0;
+
 /////////////////////////////////
-//Person
+//Tenants
 
 
 Tenants::Tenants(const Tenants& tenant)
@@ -75,8 +77,7 @@ void Tenants::setAge()
 			this->age = tmp;
 			break;
 		}
-	}
-	 
+	} 
 }
 
 void Tenants::print()
@@ -92,7 +93,35 @@ string Tenants::toString()
 ////////////////////////////////
 //Apartment
 
+Apartment::Apartment(const Apartment& apartment)
+{	
+	tenants = new Tenants[size];
+	this->size = apartment.size;
+	for (size_t i = 0; i < size; i++)
+	{
+		tenants[i] = apartment.tenants[i];
+	}
+}
 
+Apartment& Apartment::operator=(const Apartment& apartment)
+{
+	if (this == &apartment)
+	{
+		return *this;
+	}
+	if (tenants)
+	{
+		delete[] tenants;
+	}
+	tenants = new Tenants[size];
+	this->size = apartment.size;
+	for (size_t i = 0; i < size; i++)
+	{
+		tenants[i] = apartment.tenants[i];
+	}
+
+	return *this;
+}
 
 void Apartment::menu()
 {
@@ -101,7 +130,7 @@ void Apartment::menu()
 	{
 		system("cls");
 
-		int c = Menu::select_vertical({ "Додати мешканця", "Видалити мешканця", "Показати усіх машканців квартири", "Вихід" }, HorizontalAlignment::Center, 5);
+		int c = Menu::select_vertical({ "Add tenant", "Delete tenant", "Show all tenants of this apartment", "Exit" }, HorizontalAlignment::Center, 5);
 		switch (c)
 		{
 		case 0:
@@ -125,11 +154,16 @@ void Apartment::menu()
 	}
 }
 
+string Apartment::toString()
+{
+	return  " <- number of apartment";
+}
+
 void Apartment::print()
 {
 	system("cls");
 	cout << "   ----------------------------------------------------------------------\n";
-	cout << "   |                             ВСІ МЕШКАНЦІ                           |\n";
+	cout << "   |                              ALL TENANTS                           |\n";
 	cout << "   ----------------------------------------------------------------------\n";
 	for (size_t i = 0; i < size; i++)
 	{
@@ -145,6 +179,7 @@ void Apartment::addTenants()
 	tenant.setFIO();
 	tenant.setAge();
 	addElemArray(tenants, size, tenant);
+	House::countOfPeople++;
 }
 
 void Apartment::delTenants()
@@ -160,4 +195,150 @@ void Apartment::delTenants()
 	}
 	int ind = Menu::select_vertical(delList, HorizontalAlignment::Left, 2);
 	delElemArray(tenants, size, ind);
+	House::countOfPeople--;
+}
+
+/////////////////////////////////////////////
+//House 
+
+House::House(const House& house)
+{
+	size = house.size;
+	apartments = new Apartment[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		apartments[i] = house.apartments[i];
+	}
+	size_t len = strlen(house.address) + 1;
+	address = new char[len];
+	strcpy_s(address, len, house.address);
+	elevator = house.elevator;
+	countOfFloors = house.countOfFloors;
+
+}
+
+House& House::operator=(const House& house)
+{
+	if (this == &house)
+	{
+		return *this;
+	}
+	if (apartments)
+	{
+		delete[] apartments;
+	}
+	if (address)
+	{
+		delete address;
+	}
+	size = house.size;
+	apartments = new Apartment[size];
+	for (size_t i = 0; i < size; i++)
+	{
+		apartments[i] = house.apartments[i];
+	}
+
+	size_t len = strlen(house.address) + 1;
+	address = new char[len];
+	strcpy_s(address, len, house.address);
+	countOfFloors = house.countOfFloors;
+	elevator = house.elevator;
+
+	return *this;
+}
+
+void House::menu()
+{
+	while (true)
+	{
+		system("cls");
+
+		int c = Menu::select_vertical({ "Show info about House", "Work with apartment", "Exit" }, HorizontalAlignment::Center, 5);
+		switch (c)
+		{
+		case 0:
+			showInfo();
+			break;
+		case 1:
+			workWithApartment();
+			break;
+		case 2:
+			exit(0);
+			break;
+		}
+	}
+}
+
+void House::setInfo()
+{
+	apartments = new Apartment[size];
+	cout << "Enter the address: \n";
+	char buff[120];
+	cin.getline(buff, 120);
+	size_t len = strlen(buff) + 1;
+	address = new char[len];
+	strcpy_s(address, len, buff);
+	system("pause");
+	system("cls");
+
+	uint16_t tmp;
+	while (true)
+	{
+		cout << "Enter the count of floors: \n";
+		cin >> tmp;
+		cin.ignore();
+		if (tmp <= 0)
+		{
+			cout << "it`s impossible :/\n";
+			system("pause");
+			system("cls");
+		}
+		else
+		{
+			this->countOfFloors = tmp;
+			system("cls");
+			break;
+		}
+	}
+
+	cout << "Is there an elevator and does it work?\n";
+	int ind = Menu::select_vertical({ "Yes", "No " }, HorizontalAlignment::Left, 2);
+	if (ind == 0)
+	{
+		elevator = true;
+	}
+	else
+	{
+		elevator = false;
+	}
+}
+
+void House::showInfo()
+{
+	system("cls");
+	cout << "Address of the house: " << address << endl << endl;
+	cout << "Number of residents: " << countOfPeople << endl << endl;
+	cout << "Number of floors in the house: " << countOfFloors << endl << endl;
+	cout << "Number of apartments in the house: " << size << endl << endl;
+	cout << "Is there an elevator and does it work: ";
+	if (elevator == true)
+	{
+		cout << "YES\n";
+	}
+	else
+	{
+		cout << "NO\n";
+	}
+	system("pause");
+}
+
+void House::workWithApartment()
+{
+	vector<string> List;
+	for (size_t i = 0; i < size; i++)
+	{
+		List.push_back(to_string(i + 1) + apartments[i].toString());
+	}
+	int ind = Menu::select_vertical(List, HorizontalAlignment::Left, 2);
+	apartments[ind].menu();
 }

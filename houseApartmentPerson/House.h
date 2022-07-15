@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Menu.h"
 #include "Functions.h"
@@ -7,6 +7,10 @@
 using std::cout;
 using std::cin;
 using std::endl;
+
+// чисто логічно я так розумію, в цьому завданні мати конструктори копіювання и перевантажені оператори присвоєння не зовсім доречно, але по завданню треба, тому я зробив.
+
+class House;
 
 class Tenants
 {
@@ -33,29 +37,69 @@ public:
 
 class Apartment
 {
+	friend class House;
+
 	Tenants* tenants = nullptr;
 	uint16_t size = 0;
-	uint16_t apartmentNumber = 0;
-	uint16_t apartmentArea = 0;
 
 	void addTenants();
 	void delTenants();
 	void print();
 	void menu();
 
+	string toString();
+
+
 public:
 	Apartment() {}
+	Apartment(const Apartment& apartment);
+	Apartment& operator = (const Apartment& apartment);
 	~Apartment()
 	{
-		delete[] tenants;
+		delete [] tenants;
 	}
 };
 
 class House
 {
-	Apartment* countOfApartments;
-	uint16_t size = 0;
+	friend class Apartment;
+
+	Apartment* apartments;
+	uint16_t size;
+	char* address = nullptr;
+	uint16_t countOfFloors;
+	bool elevator;
+	static uint16_t countOfPeople;
+
+
+	void workWithApartment();
+	void setInfo();
+	void showInfo();
+
 public:
 
+
+	House(uint16_t countOfApartments)
+	{
+		if (countOfApartments <= 0)
+		{
+			return;
+		}
+		else
+		{
+			size = countOfApartments;
+		}
+		setInfo();
+	}
+	~House()
+	{
+		delete [] apartments;
+		delete address;
+	}
+
+	House(const House& house);
+	House& operator = (const House& house);
+
+	void menu();
 };
 
