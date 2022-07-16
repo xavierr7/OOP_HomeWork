@@ -23,9 +23,7 @@ public:
 
 	String& operator = (const String& other);
 	String operator +(const String& other);
-	String operator +(const char* str);// насправді в ньому сенсу немає, бо якщо додати до об'єкту классу звичайний рядок, то компілятор сприйме цей рядок як об'єкт цього класу
-					 // і під час виконання дії потрапить у перевантажений оператор "+" об'єкту з обє'ктом. Тому я думаю що усі інші оператори немає 
-					 // сенсу робити в такому вигляді, бо спрацює так само(але якщо потрібно я звісно можу зробити, просто це буде суцільний копіпаст, там нічим не відрізняється реалізація, зайвий код)
+	String operator +(const char* str);
 	String operator *(int number);
 	String operator -(const String& other);
 	String operator -=(const String& other);

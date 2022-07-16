@@ -4,16 +4,16 @@
 int main()
 {
 
-	String str1("helcsdjnsiujchbuioyhgcbouibcjslhbcsouiyguofsgyfudsblo");
+	String str1("hello");
 	//
 
 	String str2;
 	str2 = "rgfas34";
 	//
 
-	//String result = str1 + str2;
+	String result = str1 + str2;
 	
-	//cout << result << endl;
+	cout << result << endl;
 	//
 	String tmp ;
 	//cin >> tmp;
