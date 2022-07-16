@@ -1,4 +1,5 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -16,6 +17,8 @@ class var
 
 	void copy(const var& v);
 	int str_to_int(const char* s);
+	double str_to_double(const char* s);
+	var concat(const var& v);
 public:
 
 	var();
@@ -25,6 +28,7 @@ public:
 	var(const var& v);
 	var& operator = (const var& v);
 	var operator + (const var& v);
-	friend std::ostream& operator <<(std::ostream& out, const var& str);
+	var operator += (const var& v);
+	friend std::ostream& operator <<(std::ostream& out, const var& var);
 };
 
