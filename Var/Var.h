@@ -19,6 +19,12 @@ class var
 	int str_to_int(const char* s);
 	double str_to_double(const char* s);
 	var concat(const var& v);
+	var eraseSubStr(const var& v);
+	var operatorMultiplication(const var& v);
+	var operatorDivision(const var& v);
+	bool operatorLess(const var& v);
+	bool operatorEqual(const var& v);
+
 public:
 
 	var();
@@ -29,6 +35,20 @@ public:
 	var& operator = (const var& v);
 	var operator + (const var& v);
 	var operator += (const var& v);
+	var operator - (const var& v);
+	var operator -= (const var& v);
+	var operator * (const var& v);
+	var operator *= (const var& v);
+	var operator / (const var& v);
+	var operator /= (const var& v);
+	bool operator < (const var& v);
+	bool operator > (const var& v);
+	bool operator <= (const var& v);
+	bool operator >= (const var& v);
+	bool operator == (const var& v);
+	bool operator != (const var& v);
+
+	char& operator [] (size_t index);
 	friend std::ostream& operator <<(std::ostream& out, const var& var);
 };
 
