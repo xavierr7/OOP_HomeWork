@@ -45,7 +45,6 @@ int main()
 	cout << (c * f) << endl;
 	cout << (c / f) << endl << endl;
 
-	cout << (f + c) << endl;
 
 	return 0;
 }
