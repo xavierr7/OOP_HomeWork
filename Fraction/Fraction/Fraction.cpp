@@ -170,7 +170,6 @@ Fraction Fraction::operator/(Fraction other)
 
 Fraction Fraction::operator+=( Fraction other)
 {
-	
 	return *this = *this + other;
 }
 
