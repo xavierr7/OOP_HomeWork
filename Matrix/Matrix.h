@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include <iostream>
 
-using namespace std;
+using std::ostream;
+using std::cout;
+using std::endl;
 
 template<class T>
 class Matrix
