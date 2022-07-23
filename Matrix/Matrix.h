@@ -221,15 +221,15 @@ void Matrix<T>::addColumn(int pos)
 {
 	T** tmp = new T * [rows]; 
 
-	for (size_t i = 0; i < rows; i++)
+	for (size_t i = 0; i < rows; ++i)
 	{
 		tmp[i] = new T[columns + 1]{};
 	}
 
-	for (size_t i = 0; i < rows; i++)
+	for (size_t i = 0; i < rows; ++i)
 	{
 
-		for (size_t j = 0, k = 0; j < columns + 1; k++)
+		for (size_t j = 0, k = 0; j < columns + 1; ++k)
 		{
 			if (k == pos)
 			{
@@ -250,7 +250,7 @@ void Matrix<T>::delColumn(int pos)
 {
 	T** tmp = new T * [rows];
 
-	for (size_t i = 0; i < rows; i++)
+	for (size_t i = 0; i < rows; ++i)
 	{
 		tmp[i] = new T[columns + 1]{};
 	}
@@ -258,7 +258,7 @@ void Matrix<T>::delColumn(int pos)
 	for (size_t i = 0; i < rows; i++)
 	{
 
-		for (size_t j = 0, k = 0; j < columns - 1; k++)
+		for (size_t j = 0, k = 0; j < columns - 1; ++k)
 		{
 			if (k == pos)
 			{
@@ -277,16 +277,16 @@ void Matrix<T>::delColumn(int pos)
 template<class T>
 void Matrix<T>::sortByRow()
 {
-	for (size_t k = 0; k < rows; k++)
+	for (size_t k = 0; k < rows; ++k)
 	{
 		T x;
 		long i, j;
 
-		for (i = 0; i < columns; i++) 
+		for (i = 0; i < columns; ++i) 
 		{
 			x = arr[k][i];
 
-			for (j = i - 1; j >= 0 && arr[k][j] > x; j--)
+			for (j = i - 1; j >= 0 && arr[k][j] > x; --j)
 			{
 				arr[k][j + 1] = arr[k][j];
 			}
@@ -307,9 +307,9 @@ void Matrix<T>::transform()
 		tmp[i] = new T[rows];
 	}
 
-	for (size_t i = 0; i < rows; i++)
+	for (size_t i = 0; i < rows; ++i)
 	{
-		for (size_t j = 0; j < columns; j++)
+		for (size_t j = 0; j < columns; ++j)
 		{
 			tmp[j][i] = arr[i][j];
 		}
