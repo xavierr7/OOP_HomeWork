@@ -5,9 +5,9 @@ using namespace std;
 template<class T>
 class Matrix
 {
-	T** arr;
-	int rows = 0;    //ось тут і в подальших місцях, я проініціалізував змінні де це не потрібно              
-	int columns = 0; //тільки для того щоб компілятор не виводив попередження, ніякого логічного змісту це не несе
+	T** arr = nullptr;
+	int rows = 0;
+	int columns = 0;
 
 	void copy(const Matrix& m);
 	void forDelete();
@@ -96,8 +96,8 @@ Matrix<T>& Matrix<T>::operator=(const Matrix& m)
 	return *this;
 }
 
-template<>
-void Matrix<int>::set(int min, int max)
+template<class T>
+void Matrix<T>::set(T min, T max)
 {
 	for (size_t i = 0; i < rows; ++i)
 	{

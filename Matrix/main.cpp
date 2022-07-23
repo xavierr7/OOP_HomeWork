@@ -37,11 +37,11 @@ int main()
 	arr1.print();
 	cout << endl;
 
-	arr3.addColumn(1);
+	arr3.addColumn(3);
 	arr3.print();
 	cout << endl;
 
-	arr3.delColumn(1);
+	arr3.delColumn(3);
 	arr3.print();
 	cout << endl;
 	cout << "------------------------------------------------------------------\n";
