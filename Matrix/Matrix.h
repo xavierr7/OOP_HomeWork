@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <iostream>
+
 using namespace std;
 
 template<class T>
@@ -16,8 +17,7 @@ public:
 	Matrix(int r = 0, int c = 0);
 	~Matrix();
 	Matrix(const Matrix& m);
-	Matrix& operator = (const Matrix& m);
-	void print();
+
 	void set(T min = 0, T max = 9);
 	void addRow(size_t pos, T* arr = nullptr);
 	void delRow(int pos);
@@ -25,7 +25,10 @@ public:
 	void delColumn(int pos);
 	void sortByRow();
 	void transform();
-	//indexator
+
+	Matrix& operator = (const Matrix& m);
+	template <class T> friend ostream& operator <<(ostream&, const Matrix<T>&);
+	T*& operator [](int Array);
 	Matrix operator + (const Matrix& m);
 	Matrix operator*(int scalar);
 };
@@ -86,14 +89,6 @@ template<class T>
 Matrix<T>::Matrix(const Matrix& m)
 {
 	copy(m);
-}
-
-template<class T>
-Matrix<T>& Matrix<T>::operator=(const Matrix& m)
-{
-	this->forDelete();
-	copy(m);
-	return *this;
 }
 
 template<class T>
@@ -280,13 +275,76 @@ void Matrix<T>::delColumn(int pos)
 template<class T>
 void Matrix<T>::sortByRow()
 {
+	for (size_t k = 0; k < rows; k++)
+	{
+		T x;
+		long i, j;
 
+		for (i = 0; i < columns; i++) 
+		{
+			x = arr[k][i];
+
+			for (j = i - 1; j >= 0 && arr[k][j] > x; j--)
+			{
+				arr[k][j + 1] = arr[k][j];
+			}
+		  
+			arr[k][j + 1] = x;
+		}
+	}
+	
 }
 
 template<class T>
 void Matrix<T>::transform()
 {
+	T** tmp = new T * [columns];
 
+	for (size_t i = 0; i < columns; ++i)
+	{
+		tmp[i] = new T[rows];
+	}
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < columns; j++)
+		{
+			tmp[j][i] = arr[i][j];
+		}
+	}
+	forDelete();
+	int temp = rows;
+	rows = columns;
+	columns = temp;
+	arr = tmp;
+}
+
+template<class T>
+Matrix<T>& Matrix<T>::operator=(const Matrix& m)
+{
+	this->forDelete();
+	copy(m);
+	return *this;
+}
+
+template<class T>
+ostream& operator<<(ostream& out, const Matrix<T>& m)
+{
+	for (size_t i = 0; i < m.rows; ++i)
+	{
+		for (size_t j = 0; j < m.columns; ++j)
+		{
+			cout << m.arr[i][j] << "  ";
+		}
+		cout << "\n";
+	}
+	return out;
+}
+
+template<class T>
+T*& Matrix<T>::operator[](int pointerOnArr)
+{
+	return arr[pointerOnArr];
 }
 
 template<class T>
@@ -320,17 +378,4 @@ Matrix<T> Matrix<T>::operator*(int scalar)
 		}
 	}
 	return newMatrix;
-}
-
-template<class T>
-void Matrix<T>::print()
-{
-	for (size_t i = 0; i < rows; ++i)
-	{
-		for (size_t j = 0; j < columns; ++j)
-		{
-			cout << arr[i][j] << "  ";
-		}
-		cout << "\n";
-	}
 }

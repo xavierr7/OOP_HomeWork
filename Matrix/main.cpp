@@ -14,36 +14,31 @@ int main()
 	Matrix<char> arr3(2, 5);
 	arr3.set();
 
-	arr1.print();
-	cout << endl;
-	arr2.print();
-	cout << endl;
-	arr3.print();
-	cout << endl;
+	cout << arr1 << endl;
+
+	cout << arr2 << endl;
+
+	cout << arr3 << endl;
+
 	cout << "------------------------------------------------------------------\n";
 	/////////////////////////
 	//changes of arrays
 
 	arr1.addRow(1);
-	arr1.print();
-	cout << endl;
+	cout << arr1 << endl;
 
 	double arr[5]{ 3.2, 5.1, 7.9, 2.5, 0.4 };
 	arr2.addRow(1, arr);
-	arr2.print();
-	cout << endl;
+	cout << arr2 << endl;
 
 	arr1.delRow(1);
-	arr1.print();
-	cout << endl;
+	cout << arr1 << endl;
 
 	arr3.addColumn(3);
-	arr3.print();
-	cout << endl;
+	cout << arr3 << endl;
 
 	arr3.delColumn(3);
-	arr3.print();
-	cout << endl;
+	cout << arr3 << endl;
 	cout << "------------------------------------------------------------------\n";
 
 	/////////////////////////////
@@ -52,25 +47,49 @@ int main()
 
 	Matrix<int> arr4(2, 5);
 	arr4.set();
-	arr4.print();
-	cout << endl;
+	cout << arr4 << endl;
 
 	Matrix<int> tmpArr = arr1 + arr4;
 
-	tmpArr.print();
-
-	cout << endl;
+	cout << tmpArr << endl;
 
 	tmpArr = arr1 * 2;
-	tmpArr.print();
-	cout << endl;
+	cout << tmpArr << endl;
 	cout << "------------------------------------------------------------------\n";
 
 	////////////////////////
 	//sort by row
 
+	arr1.sortByRow();
+	cout << arr1 << endl;
+	
+
+	arr2.sortByRow();
+	cout << arr2 << endl;
+
+	arr3.sortByRow();
+	cout << arr3 << endl;
+	cout << "------------------------------------------------------------------\n";
+
+	////////////////////////////////
+	//transform
+
+	arr1.transform();
+	cout << arr1 << endl;
+
+	arr2.transform();
+	cout << arr2 << endl;
 
 
+	arr3.transform();
+	cout << arr3 << endl;
+	cout << "------------------------------------------------------------------\n";
+
+	///////////////////
+	// index
+
+	cout << arr3[0][0];
+	
 
 	return 0;
 }
