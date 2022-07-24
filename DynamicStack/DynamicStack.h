@@ -129,6 +129,7 @@ template<class T, size_t size>
 inline void DynamicStack<T, size>::clear()
 {
 	delete[]data;
+	data = nullptr;
 	top = 0;
 }
 

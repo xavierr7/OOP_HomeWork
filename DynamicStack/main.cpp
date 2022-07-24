@@ -25,6 +25,8 @@ int main()
 	DynamicStack<int, 5> st1(st);
 
 	st1.print();
+	st1.clear();
+	st1.print();
 
 	return 0;
 }
