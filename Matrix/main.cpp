@@ -88,7 +88,7 @@ int main()
 	///////////////////
 	// index
 
-	cout << arr3[0][0];
+	cout << arr3[1][1];
 	
 
 	return 0;
