@@ -36,7 +36,7 @@ DynamicStack<T, size>::DynamicStack(const DynamicStack& st)
 {
 	top = st.top;
 	data = new T [top];
-	for (size_t i = 0; i < top; i++)
+	for (size_t i = 0; i < top; ++i)
 	{
 		data[i] = st.data[i];
 	}
@@ -52,7 +52,7 @@ DynamicStack<T, size>& DynamicStack<T, size>::operator=(const DynamicStack& st)
 
 	top = st.top;
 	data = new T[top];
-	for (size_t i = 0; i < top; i++)
+	for (size_t i = 0; i < top; ++i)
 	{
 		data[i] = st.data[i];
 	}
@@ -74,7 +74,7 @@ bool DynamicStack<T, size>::push(const T& value)
 			DynamicStack<T, size> tmp(*this);
 			delete[] data;
 			data = new T[++top];
-			for (size_t i = 0; i < tmp.top; i++)
+			for (size_t i = 0; i < tmp.top; ++i)
 			{
 				data[i] = tmp.data[i];
 			}
@@ -100,7 +100,7 @@ void DynamicStack<T, size>::pop()
 		DynamicStack<T, size> tmp(*this);
 		delete[] data;
 		data = new T[--top];
-		for (size_t i = 0; i < top; i++)
+		for (size_t i = 0; i < top; ++i)
 		{
 			data[i] = tmp.data[i];
 		}
@@ -136,7 +136,7 @@ inline void DynamicStack<T, size>::clear()
 template<class T, size_t size>
 inline void DynamicStack<T, size>::print() const
 {
-	for (size_t i = 0; i < top; i++)
+	for (size_t i = 0; i < top; ++i)
 	{
 		cout << data[i] << " ";
 	}
