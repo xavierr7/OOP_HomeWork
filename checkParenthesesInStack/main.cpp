@@ -8,7 +8,7 @@ int main()
 	string str = "({x-y-z} * [x + 2y] - (z + 4x));";
 	string incorrectStr;
 
-	for (size_t i = 0; str[i] != ';'; i++)
+	for (size_t i = 0; str[i] != ';'; ++i)
 	{
 		int tmp;
 		if (str[i] == ')' || str[i] == ']' || str[i] == '}')
