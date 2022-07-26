@@ -10,7 +10,7 @@ int main()
 
 	for (size_t i = 0; str[i] != ';'; ++i)
 	{
-		int tmp;
+		char tmp;
 		if (str[i] == ')' || str[i] == ']' || str[i] == '}')
 		{
 			tmp = str[i];
