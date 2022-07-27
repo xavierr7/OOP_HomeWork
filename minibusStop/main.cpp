@@ -1,22 +1,13 @@
 #include "halt.h"
 
-string randomizerOfName();
-
 int main()
 {
-	u_int averagePassengerArrivalTime;
-	u_int averageTimeOfArrivalOfMinibuses;
-	u_int maximumNumberOfPeopleAtTheStop;
+	u_int average_Passenger_ArrivalTime;
+	u_int average_TimeOfArrival_OfMinibuses;
+	u_int maximum_NumberOfPeople_AtTheStop;
 
 
 
 
 	return 0;
-}
-
-string randomizerOfName()
-{
-	string listName[20]{"Ivan", "Artem", "Kateryna", "Max", "Tetyana", "Andriy", "Sergiy", "Olga", "Sophia", "Karina", "Dmytro", "Elena", "Eren", "Levi", "Hisoka", "Killua", "Gon", "Hanji", "Kurapika", "Leorio"};
-	u_int index = rand() % 20;
-	return listName[index];
 }

@@ -9,8 +9,8 @@ using std::endl;
 template<class T, size_t size>
 class DynamicStack
 {
-	T* data = nullptr;
-	int top = 0;
+	T*  data = nullptr;
+	int top  = 0;
 
 public:
 	DynamicStack(){}

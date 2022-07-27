@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\ArtemMillerPV111\OOP\PV111-OOP-master\Library\Queue.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="halt.h" />
   </ItemGroup>
   <ItemGroup>
