@@ -127,9 +127,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Local Repository\Containers\Queue\Queue.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="halt.h" />
+    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

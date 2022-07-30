@@ -2,20 +2,16 @@
 #include<iostream>
 #include <windows.h>
 #include <string>
-#include "/all-projects/academic-projects/local/cpp-projects/Local Repository/Containers/Queue/Queue.h"
 #include "Functions.h"
 #include <iomanip>
-
-using std::string;
-using std::cout;
-using std::endl;
-
+#include "Queue.h"
+using namespace std;
 
 //////////////////////
 class People
 {
 	string name;
-	size_t  timeBeingAtTheStop = 0;
+	size_t timeBeingAtTheStop = 0;
 
 public:
 
@@ -47,13 +43,13 @@ ostream& operator<<(ostream& out, const People p)
 class Minibus
 {
 	string brand;
-	size_t  number;
-	size_t  emptyPlaces;
+	size_t number;
+	size_t emptyPlaces;
 
 public:
 	Minibus()
 	{
-		brand = randomizerOfBrand();
+		brand  = randomizerOfBrand();
 		number = rand() % 100 + 1;
 		setEmptyPlaces();
 	}
@@ -69,7 +65,6 @@ public:
 	}
 
 	friend ostream& operator << (ostream& out, const Minibus mb);
-
 };
 
 ostream& operator<<(ostream& out, const Minibus mb)
@@ -85,10 +80,10 @@ class Halt
 {
 	Queue<People>  qPeople;
 	Queue<Minibus> qMinibus;
-	size_t average_Passenger_ArrivalTime;
-	size_t average_TimeOfArrival_OfMinibuses;
-	size_t maximum_NumberOfPeople_AtTheStop_AtOneMoment;
-	size_t averageTime_BeingOnStop = 0;
+	size_t		   average_Passenger_ArrivalTime;
+	size_t         average_TimeOfArrival_OfMinibuses;
+	size_t         maximum_NumberOfPeople_AtTheStop_AtOneMoment;
+	size_t         averageTime_BeingOnStop = 0;
 
 	void servedPassengers();
 
@@ -97,8 +92,8 @@ public:
 	{
 		if (average_Passenger_ArrivalTime > 1 && average_TimeOfArrival_OfMinibuses > 1 && maximum_NumberOfPeople_AtTheStop_AtOneMoment > 0)
 		{
-			this->average_Passenger_ArrivalTime = average_Passenger_ArrivalTime;
-			this->average_TimeOfArrival_OfMinibuses = average_TimeOfArrival_OfMinibuses;
+			this->average_Passenger_ArrivalTime                = average_Passenger_ArrivalTime;
+			this->average_TimeOfArrival_OfMinibuses            = average_TimeOfArrival_OfMinibuses;
 			this->maximum_NumberOfPeople_AtTheStop_AtOneMoment = maximum_NumberOfPeople_AtTheStop_AtOneMoment;
 		}
 		Minibus newMinibus;
@@ -121,10 +116,10 @@ void Halt::servedPassengers()
 		qPeople.dequeue();
 	
 	Minibus newMinibus;
-	newMinibus = qMinibus.peek();
-	newMinibus.setEmptyPlaces();
-	qMinibus.dequeue();
-	qMinibus.enqueue(newMinibus);
+			newMinibus = qMinibus.peek();
+			newMinibus.setEmptyPlaces();
+			qMinibus.dequeue();
+			qMinibus.enqueue(newMinibus);
 }
 
 void Halt::process()
@@ -133,7 +128,7 @@ void Halt::process()
 	{
 		size_t tmpTimeMinibus = rand() % ((average_TimeOfArrival_OfMinibuses + 1) - (average_TimeOfArrival_OfMinibuses - 1) + 1) + average_TimeOfArrival_OfMinibuses - 1;
 
-		size_t tmpTimePeople = rand() % ((average_Passenger_ArrivalTime + 1) - (average_Passenger_ArrivalTime - 1) + 1) + average_Passenger_ArrivalTime - 1;
+		size_t tmpTimePeople  = rand() % ((average_Passenger_ArrivalTime + 1) - (average_Passenger_ArrivalTime - 1) + 1) + average_Passenger_ArrivalTime - 1;
 
 		for (size_t i = 0; i < tmpTimeMinibus; ++i)
 		{
@@ -143,7 +138,7 @@ void Halt::process()
 			cout << "-------------------------------------------           -------------------------------------------" << endl;
 			
 			Queue<People> all_qPeople = qPeople;
-			size_t sizePeople = qPeople.length();
+			size_t        sizePeople  = qPeople.length();
 			for (size_t i = 0; i < sizePeople; i++)
 			{
 				averageTime_BeingOnStop += all_qPeople.peek().getTime();
@@ -162,26 +157,27 @@ void Halt::process()
 			if (i == tmpTimePeople)
 			{
 				People newPerson;
-				qPeople.enqueue(newPerson);
+				       qPeople.enqueue(newPerson);
 
-				tmpTimePeople = rand() % ((average_Passenger_ArrivalTime + 1) - (average_Passenger_ArrivalTime - 1) + 1) + average_Passenger_ArrivalTime - 1;
-				tmpTimePeople += i;
+				       tmpTimePeople = rand() % ((average_Passenger_ArrivalTime + 1) - (average_Passenger_ArrivalTime - 1) + 1) + average_Passenger_ArrivalTime - 1;
+				       tmpTimePeople += i;
 			}
 
 			Queue<People> new_qPeople;
-			size_t size = qPeople.length();
+			size_t        size = qPeople.length();
 			for (size_t j = 0; j < size; j++)
 			{
 				People currentPerson = qPeople.peek();
-				currentPerson.incrementTime();
-				new_qPeople.enqueue(currentPerson);
-				qPeople.dequeue();
+				       currentPerson.incrementTime();
+				       new_qPeople.enqueue(currentPerson);
+				       qPeople.dequeue();
 			}
  			qPeople = new_qPeople;
 
 			gotoxy(82, 2);
 			cout << "count " << qPeople.length();
 			qPeople.print(54, 4);
+
 			Sleep(1000);
 		}
 
@@ -199,7 +195,6 @@ void Halt::process()
 
 			gotoxy(55, 2);
 			cout << "MINIBUS HALT     count " << qPeople.length();
-
 			qPeople.print(54, 4);
 
 			gotoxy(0, 6);
@@ -208,6 +203,7 @@ void Halt::process()
 			cout << "-------------------------------------\n";
 			gotoxy(4, 7);
 			cout << "Count of empty places - " << qMinibus.peek().getEmptyPlaces();
+
 			gotoxy(0, 10);
 			if (i < 3)
 			{
@@ -229,8 +225,8 @@ void Halt::process()
 				for (size_t j = 0; j < size; j++)
 				{
 					People currentPerson = all_qPeople.peek();
-					gotOntTheBus_qPeople.enqueue(currentPerson);
-					all_qPeople.dequeue();
+					       gotOntTheBus_qPeople.enqueue(currentPerson);
+					       all_qPeople.dequeue();
 				}
 				gotOntTheBus_qPeople.print(0, 12);
 			}
@@ -242,8 +238,8 @@ void Halt::process()
 		if (qPeople.length() > maximum_NumberOfPeople_AtTheStop_AtOneMoment)
 		{
 			Minibus newMinibus;
-			qMinibus.enqueue(newMinibus);
-			average_TimeOfArrival_OfMinibuses /= qMinibus.length();
+			        qMinibus.enqueue(newMinibus);
+			        average_TimeOfArrival_OfMinibuses /= qMinibus.length();
 		}
 	}
 }
