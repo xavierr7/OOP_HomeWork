@@ -5,7 +5,7 @@
 string randomizerOfName()
 {
 	string listName[20]{ "Ivan", "Artem", "Kateryna", "Max", "Tetyana", "Andriy", "Sergiy", "Olga", "Sophia",
-		"Karina", "Dmytro", "Elena", "Eren", "Levi", "Hisoka", "Killua", "Gon", "Hanji", "Kurapika", "Leorio" };
+		"Karina", "Dmytro", "Elena", "Eren", "Levi", "Hisoka", "Killua", "Gon", "Erwin", "Kurapika", "Leorio" };
 	u_int index = rand() % 20;
 	return listName[index];
 }

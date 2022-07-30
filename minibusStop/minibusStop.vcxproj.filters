@@ -18,10 +18,10 @@
     <ClInclude Include="halt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\ArtemMillerPV111\OOP\PV111-OOP-master\Library\Queue.h">
+    <ClInclude Include="Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Functions.h">
+    <ClInclude Include="..\..\..\..\Local Repository\Containers\Queue\Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
