@@ -41,7 +41,6 @@ public:
 
 	T& operator[] (size_t ind)const;
 
-	Forward_List<T> clone();
 	bool   isEmpty()const;
 	size_t length()const;
 	void   clear();
@@ -249,7 +248,10 @@ Forward_List<T> Forward_List<T>::operator*(const Forward_List<T>& list)
 {
 	Data<T>* posThis = this->first;
 	Data<T>* posList = list.first;
+
 	Forward_List<T> temp;
+	Data<T>* posTemp = temp.first;
+
 
 	while (posThis)
 	{
@@ -257,7 +259,23 @@ Forward_List<T> Forward_List<T>::operator*(const Forward_List<T>& list)
 		{
 			if (posThis->value == posList->value)
 			{
+				bool flag = false;
+				while (posTemp)
+				{
+					if (posThis->value == posTemp->value)
+					{
+						flag = true;
+						break;
+					}
+					posTemp = posTemp->next;
+				}
+				posTemp = temp.first;
+
+				if (flag)
+					break;
+				else
 				temp.push_back(posThis->value);
+
 				break;
 			}
 			posList = posList->next;
@@ -324,13 +342,6 @@ T& Forward_List<T>::operator[](size_t ind) const
 {
 	assert(ind >= 0 && ind < size);
 	return this->at(ind);
-}
-
-template<class T>
-Forward_List<T> Forward_List<T>::clone()
-{
-	Forward_List<T> temp(*this);
-	return temp;
 }
 
 template<class T>
