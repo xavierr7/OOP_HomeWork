@@ -127,7 +127,7 @@ void Forward_List<T>::insert(const T& value, size_t ind)
 	else
 	{
 		Data<T>* pos = first;
-		for (size_t i = 0; i < ind - 1; i++)
+		for (size_t i = 0; i < ind - 1; ++i)
 		{
 			pos = pos->next;
 		}
@@ -144,7 +144,7 @@ void Forward_List<T>::pop_back()
 {
 	assert(size > 0);
 	Data<T>* pos = first;
-	for (size_t i = 0; i < size - 2; i++)
+	for (size_t i = 0; i < size - 2; ++i)
 	{
 		pos = pos->next;
 	}
@@ -190,7 +190,7 @@ void Forward_List<T>::remove(size_t ind)
 	else
 	{
 		Data<T>* pos = first;
-		for (size_t i = 0; i < ind - 1; i++)
+		for (size_t i = 0; i < ind - 1; ++i)
 		{
 			pos = pos->next;
 		}
@@ -220,7 +220,7 @@ T& Forward_List<T>::at(size_t ind) const
 {
 	assert(ind >= 0 && ind < size);
 	Data<T>* pos = first;
-	for (size_t i = 0; i < ind; i++)
+	for (size_t i = 0; i < ind; ++i)
 	{
 		pos = pos->next;
 	}
