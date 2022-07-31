@@ -1,4 +1,5 @@
 #include "Forward_List.h"
+#include "Functions.h"
 
 
 int main()
@@ -23,6 +24,9 @@ int main()
 
 	Forward_List<int> l4;
 	l4 = l1 * l2;
+	l4.print();
+
+	l4.sort(asc);
 	l4.print();
 
 	return 0;

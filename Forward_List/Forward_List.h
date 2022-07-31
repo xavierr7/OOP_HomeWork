@@ -46,6 +46,7 @@ public:
 	void   clear();
 	void   print();
 	void   reverse();
+	void   sort(bool(*method)(T a, T b));
 };
 
 template<class T>
@@ -396,5 +397,20 @@ void Forward_List<T>::reverse()
 		swap(posFromBegin->value, posFromEnd->value);
 		posFromBegin = posFromBegin->next;
 		posFromEnd = first;
+	}
+}
+
+template<class T>
+void Forward_List<T>::sort(bool(*method)(T a, T b))
+{
+	for (size_t i = 0; i < size - 1; i++)
+	{
+		for (size_t j = 0; j < size - 1 - i; j++)
+		{
+			if (method(this->operator[](j), this->operator[](j + 1)))
+			{
+				swap(this->operator[](j), this->operator[](j + 1));
+			}
+		}
 	}
 }

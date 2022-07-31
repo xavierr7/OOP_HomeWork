@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Data.h" />
     <ClInclude Include="Forward_List.h" />
+    <ClInclude Include="Functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
